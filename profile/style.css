@@ -353,3 +353,47 @@ section h2 {
 .interests-list li {
   margin-bottom: 6px;
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  header.site-header {
+    padding: 16px;
+  }
+
+  main {
+    padding: 32px 0 56px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero img {
+    width: 88px;
+    height: 88px;
+  }
+
+  section {
+    margin-top: 32px;
+  }
+
+  .a4-page {
+    padding: 24px 18px;
+  }
+
+  .cv-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .entry-head {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
