@@ -1,0 +1,8 @@
+.DS_Store
+/ava.png
+/CV_Alex_Karachun.pdf
+CV/*
+!CV/current
+CV/current/*
+!CV/current/resume_en.pdf
+!CV/current/resume_ru.pdf

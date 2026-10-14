@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alexander Karachun</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Alexander Karachun</a>
+    <nav>
+      <button type="button" data-lang-toggle aria-label="Switch language">EN</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <img src="img/ava.png" alt="Alexander Karachun" />
+      <div>
+        <h1 data-field="name"></h1>
+        <p data-field="tagline"></p>
+      </div>
+    </div>
+
+    <section class="bio">
+      <p data-field="bio"></p>
+    </section>
+
+    <section class="contacts">
+      <h2 data-field="sections.contacts"></h2>
+      <ul class="contacts-list" data-list="contacts"></ul>
+    </section>
+
+    <section class="portfolio">
+      <h2 data-field="sections.portfolio"></h2>
+      <div class="portfolio-grid" data-list="portfolio"></div>
+    </section>
+
+    <section id="cv" class="cv-section">
+      <h2 data-field="sections.cv"></h2>
+      <div class="a4-page">
+        <div class="cv-head">
+          <div>
+            <h1 class="cv-name" data-field="cv.name"></h1>
+            <p class="cv-tagline" data-field="cv.tagline"></p>
+            <p class="cv-contacts" data-list="cv-contacts"></p>
+          </div>
+          <a class="download-btn" data-field="cv.downloadLink" href="#" download></a>
+        </div>
+
+        <section class="cv-block">
+          <h2 data-field="cv.sections.experience"></h2>
+          <div data-list="cv-experience"></div>
+        </section>
+
+        <section class="cv-block">
+          <h2 data-field="cv.sections.education"></h2>
+          <div class="entry">
+            <div class="entry-head">
+              <span data-field="cv.education.school"></span>
+              <span class="entry-period" data-field="cv.education.period"></span>
+            </div>
+            <p class="entry-intro" data-field="cv.education.degree"></p>
+            <p class="entry-intro" data-field="cv.education.note"></p>
+          </div>
+          <h3 class="cv-subheading" data-field="cv.sections.coursework"></h3>
+          <ul class="coursework-list" data-list="cv-coursework"></ul>
+        </section>
+
+        <section class="cv-block">
+          <h2 data-field="cv.sections.projects"></h2>
+          <div data-list="cv-projects"></div>
+        </section>
+
+        <section class="cv-block">
+          <h2 data-field="cv.sections.skills"></h2>
+          <ul class="skills-list" data-list="cv-skills"></ul>
+        </section>
+
+        <section class="cv-block">
+          <h2 data-field="cv.sections.interests"></h2>
+          <ul class="interests-list" data-list="cv-interests"></ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="landing-data.js"></script>
+  <script src="cv-data.js"></script>
+  <script src="i18n.js"></script>
+  <script>
+    function render(lang) {
+      const d = landingData[lang];
+      const cv = cvData[lang];
+
+      document.querySelector('[data-field="name"]').textContent = d.name;
+      document.querySelector('[data-field="tagline"]').textContent = d.tagline;
+      document.querySelector('[data-field="bio"]').textContent = d.bio;
+      document.querySelector('[data-field="sections.contacts"]').textContent = d.sections.contacts;
+      document.querySelector('[data-field="sections.portfolio"]').textContent = d.sections.portfolio;
+      document.querySelector('[data-field="sections.cv"]').textContent = d.sections.cv;
+
+      const contactsEl = document.querySelector('[data-list="contacts"]');
+      contactsEl.innerHTML = "";
+      d.contacts.forEach((c) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="label">${c.label}:</span><a href="${c.href}">${c.value}</a>`;
+        contactsEl.appendChild(li);
+      });
+
+      const portfolioEl = document.querySelector('[data-list="portfolio"]');
+      portfolioEl.innerHTML = "";
+      d.portfolio.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `<h3>${p.title}</h3><p>${p.description}</p><a href="${p.link}" target="_blank" rel="noopener">GitHub</a>`;
+        portfolioEl.appendChild(card);
+      });
+
+      renderCV(cv);
+    }
+
+    function renderCV(cv) {
+      document.querySelector('[data-field="cv.name"]').textContent = cv.name;
+      document.querySelector('[data-field="cv.tagline"]').textContent = cv.tagline;
+      document.querySelector('[data-field="cv.sections.experience"]').textContent = cv.sections.experience;
+      document.querySelector('[data-field="cv.sections.education"]').textContent = cv.sections.education;
+      document.querySelector('[data-field="cv.sections.coursework"]').textContent = cv.sections.coursework;
+      document.querySelector('[data-field="cv.sections.projects"]').textContent = cv.sections.projects;
+      document.querySelector('[data-field="cv.sections.skills"]').textContent = cv.sections.skills;
+      document.querySelector('[data-field="cv.sections.interests"]').textContent = cv.sections.interests;
+      document.querySelector('[data-field="cv.education.school"]').textContent = cv.education.school;
+      document.querySelector('[data-field="cv.education.period"]').textContent = cv.education.period;
+      document.querySelector('[data-field="cv.education.degree"]').textContent = cv.education.degree;
+      document.querySelector('[data-field="cv.education.note"]').textContent = cv.education.note;
+
+      const downloadEl = document.querySelector('[data-field="cv.downloadLink"]');
+      downloadEl.href = cv.pdf;
+      downloadEl.textContent = cv.sections.download;
+
+      const contactsEl = document.querySelector('[data-list="cv-contacts"]');
+      contactsEl.innerHTML = cv.contacts.map((c) => `<a href="${c.href}">${c.label}</a>`).join(" &middot; ");
+
+      const experienceEl = document.querySelector('[data-list="cv-experience"]');
+      experienceEl.innerHTML = "";
+      cv.experience.forEach((e) => {
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.innerHTML = `
+          <div class="entry-head">
+            <span>${e.role} — ${e.org}</span>
+            <span class="entry-period">${e.period}</span>
+          </div>
+          ${e.intro ? `<p class="entry-intro">${e.intro}</p>` : ""}
+          <ul>${e.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
+        `;
+        experienceEl.appendChild(div);
+      });
+
+      const courseworkEl = document.querySelector('[data-list="cv-coursework"]');
+      courseworkEl.innerHTML = cv.coursework.map((c) => `<li>${c}</li>`).join("");
+
+      const projectsEl = document.querySelector('[data-list="cv-projects"]');
+      projectsEl.innerHTML = "";
+      cv.projects.forEach((p) => {
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.innerHTML = `
+          <div class="entry-head"><a href="${p.link}" target="_blank" rel="noopener">${p.title}</a></div>
+          <ul>${p.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
+        `;
+        projectsEl.appendChild(div);
+      });
+
+      const skillsEl = document.querySelector('[data-list="cv-skills"]');
+      skillsEl.innerHTML = cv.skills.map((s) => `<li><span class="label">${s.label}:</span>${s.value}</li>`).join("");
+
+      const interestsEl = document.querySelector('[data-list="cv-interests"]');
+      interestsEl.innerHTML = cv.interests.map((i) => `<li>${i}</li>`).join("");
+    }
+
+    i18n.initToggle(render);
+  </script>
+</body>
+</html>
