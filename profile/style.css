@@ -153,33 +153,46 @@ section h2 {
 .portfolio-grid {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-.card {
-  border: 1px solid var(--border);
-  background: var(--card-bg);
-  border-radius: 10px;
-  padding: 20px;
-}
-
-.card h3 {
+.portfolio-item h3 {
   margin: 0 0 8px;
   font-size: 1.05rem;
 }
 
-.card p {
-  margin: 0 0 10px;
+.portfolio-item p {
+  margin: 0;
   color: var(--muted);
 }
 
-.card a {
+.portfolio-item a {
   color: var(--accent);
   text-decoration: none;
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
-.card a:hover {
+.portfolio-item a:hover {
+  text-decoration: underline;
+}
+
+.portfolio-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+.portfolio-more {
+  margin: 0;
+}
+
+.portfolio-more a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.portfolio-more a:hover {
   text-decoration: underline;
 }
 

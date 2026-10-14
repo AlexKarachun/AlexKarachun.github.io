@@ -15,3 +15,5 @@
 
 ## NeuroPushkin
 Собрал датасет из ~7000 синтетических текстов через OpenAI API и дообучил ruGPT-3 Medium для генерации прозы в стиле Пушкина. Исследовал абляции архитектур (RNN, GRU, LSTM, ruGPT-3) и токенизаторов, включая собственный BPE-токенизатор. Ссылка: https://github.com/AlexKarachun/neuroPushkin-nlp_project
+
+Все разобранные статьи: https://github.com/AlexKarachun/ml_article_reports

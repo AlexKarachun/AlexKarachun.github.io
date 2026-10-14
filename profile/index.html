@@ -35,6 +35,8 @@
     <section class="portfolio">
       <h2 data-field="sections.portfolio"></h2>
       <div class="portfolio-grid" data-list="portfolio"></div>
+      <hr class="portfolio-divider" />
+      <p class="portfolio-more"><a href="https://github.com/AlexKarachun/ml_article_reports" target="_blank" rel="noopener" data-field="portfolioMoreText"></a></p>
     </section>
 
     <section id="cv" class="cv-section">
@@ -100,6 +102,7 @@
       document.querySelector('[data-field="sections.contacts"]').textContent = d.sections.contacts;
       document.querySelector('[data-field="sections.portfolio"]').textContent = d.sections.portfolio;
       document.querySelector('[data-field="sections.cv"]').textContent = d.sections.cv;
+      document.querySelector('[data-field="portfolioMoreText"]').textContent = d.portfolioMoreText;
 
       const contactsEl = document.querySelector('[data-list="contacts"]');
       contactsEl.innerHTML = "";
@@ -111,11 +114,12 @@
 
       const portfolioEl = document.querySelector('[data-list="portfolio"]');
       portfolioEl.innerHTML = "";
-      d.portfolio.forEach((p) => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `<h3>${p.title}</h3><p>${p.description}</p><a href="${p.link}" target="_blank" rel="noopener">GitHub</a>`;
-        portfolioEl.appendChild(card);
+      d.portfolio.forEach((p, i) => {
+        if (i > 0) portfolioEl.appendChild(document.createElement("hr")).className = "portfolio-divider";
+        const item = document.createElement("div");
+        item.className = "portfolio-item";
+        item.innerHTML = `<h3>${p.title}</h3><p>${p.description} <a href="${p.link}" target="_blank" rel="noopener">GitHub</a></p>`;
+        portfolioEl.appendChild(item);
       });
 
       renderCV(cv);

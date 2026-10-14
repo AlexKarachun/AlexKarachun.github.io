@@ -31,6 +31,7 @@ const landingData = {
         link: "https://github.com/AlexKarachun/neuroPushkin-nlp_project",
       },
     ],
+    portfolioMoreText: "Все разобранные статьи →",
   },
   en: {
     name: "Alexander Karachun",
@@ -63,5 +64,6 @@ const landingData = {
         link: "https://github.com/AlexKarachun/neuroPushkin-nlp_project",
       },
     ],
+    portfolioMoreText: "All reviewed papers →",
   },
 };
