@@ -279,6 +279,15 @@ section h2 {
   font-weight: 600;
 }
 
+.entry-head a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.entry-head a:hover {
+  text-decoration: underline;
+}
+
 .entry-period {
   color: var(--muted);
   font-weight: 400;
